@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		<menugroup>[% objecttype %][% IF menugroup %]/[% menugroup %][% END %]</menugroup>
+		<menuname>[% menuname %]</menuname>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<keyword name="artistid" value="{context.itemid}"/>
+		[% IF menuprefix %]
+		<menuprefix>[% menuprefix %]: </menuprefix>
+		<itemseparator>: </itemseparator>
+		[% END %]
+		<menuheader>{context.itemname} {count}</menuheader>
+		<itemtype>artist</itemtype>
+		<itemformat>artist</itemformat>
+		<contextid>artist</contextid>
+		<menutype>sql</menutype>
+		<menulinks>alpha</menulinks>
+		<menudata>
+			select contributors.id,contributors.name,substr(contributors.namesort,1,1) from contributors[% IF library or activelibrary %],library_contributor[% END %]
+			where
+				[%- IF library or activelibrary %]
+				contributors.id=library_contributor.contributor and
+				library_contributor.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+				[%- END %]
+				contributors.id={artistid}
+			order by contributors.namesort asc
+		</menudata>
+		<menu></menu>
+	</menu>
+</custombrowsemenus>

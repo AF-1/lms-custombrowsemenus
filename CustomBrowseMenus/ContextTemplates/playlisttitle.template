@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		<menugroup>[% objecttype %][% IF menugroup %]/[% menugroup %][% END %]</menugroup>
+		<menuname>[% menuname %]</menuname>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<keyword name="playlistid" value="{context.itemid}"/>
+		[% IF menuprefix %]
+		<menuprefix>[% menuprefix %]: </menuprefix>
+		<itemseparator>: </itemseparator>
+		[% END %]
+		<menuheader>{context.itemname} {count}</menuheader>
+		<itemtype>playlist</itemtype>
+		<contextid>playlist</contextid>
+		<menutype>sql</menutype>
+		<menulinks>alpha</menulinks>
+		<menudata>
+			select tracks.id,tracks.title,substr(tracks.titlesort,1,1) from tracks[% IF library or activelibrary %],library_contributor[% END %]
+			where
+				[%- IF library or activelibrary %]
+				tracks.id=library_track.track and
+				library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+				[%- END %]
+				tracks.id={playlistid}
+			order by tracks.titlesort asc
+		</menudata>
+		<menu></menu>
+	</menu>
+</custombrowsemenus>

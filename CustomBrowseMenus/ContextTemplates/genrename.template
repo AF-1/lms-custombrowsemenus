@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		<menugroup>[% objecttype %][% IF menugroup %]/[% menugroup %][% END %]</menugroup>
+		<menuname>[% menuname %]</menuname>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<keyword name="genreid" value="{context.itemid}"/>
+		[% IF menuprefix %]
+		<menuprefix>[% menuprefix %]: </menuprefix>
+		<itemseparator>: </itemseparator>
+		[% END %]
+		<menuheader>{context.itemname} {count}</menuheader>
+		<itemtype>genre</itemtype>
+		<contextid>genre</contextid>
+		<menutype>sql</menutype>
+		<menulinks>alpha</menulinks>
+		<menudata>
+			select genres.id,genres.name,substr(genres.namesort,1,1) from genres[% IF library or activelibrary %],library_contributor[% END %]
+			where
+				[%- IF library or activelibrary %]
+				genres.id=library_genre.genre and
+				library_genre.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+				[%- END %]
+				genres.id={genreid}
+			order by genres.namesort asc
+		</menudata>
+		<menu></menu>
+	</menu>
+</custombrowsemenus>

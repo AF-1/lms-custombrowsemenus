@@ -1,0 +1,41 @@
+[% page = "PLUGIN_CUSTOMBROWSEMENUS" %]
+[% PROCESS settings/header.html %]
+
+[% PROCESS plugins/CustomBrowseMenus/settings/subpage_chooser.html %]
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_CBMPARENTFOLDER" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_CBMPARENTFOLDER_DESC" %]
+		<input type="text" class="stdedit selectFolder" name="pref_cbmparentfolderpath" id="cbmparentfolderpath" value="[% prefs.cbmparentfolderpath %]" size="70">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_MENUNAME" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_MENUNAME_DESC" %]
+		<input type="text" class="stdedit" name="pref_menuname" id="menuname" value="[% prefs.menuname %]" size="30">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOPLEVELMENUINEXTRAS" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOPLEVELMENUINEXTRAS_DESC" %]
+	<input type="checkbox" name="pref_toplevelmenuinextras" id="toplevelmenuinextras" [% IF prefs.toplevelmenuinextras %] checked [% END %]">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_OVERRIDE_TRACKINFO" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_OVERRIDE_TRACKINFO_DESC" %]
+	<input type="checkbox" name="pref_override_trackinfo" id="override_trackinfo" [% IF prefs.override_trackinfo %] checked [% END %]">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOUCH_TO_PLAY" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOUCH_TO_PLAY_DESC" %]
+	<input type="checkbox" name="pref_touchtoplay" id="touchtoplay" [% IF prefs.touchtoplay %] checked [% END %]">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_HEADER_VALUE_SEPARATOR" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_HEADER_VALUE_SEPARATOR_DESC" %]
+		<input type="text" class="stdedit" name="pref_header_value_separator" id="header_value_separator" value="[% prefs.header_value_separator %]" size="5">
+	[% END %]
+
+	[% WRAPPER setting title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_PROPERTIES" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_PROPERTIES_DESC" %]
+		[% FOR property = prefs.properties.keys.sort %]
+			<input type="text" class="stdedit" name="property_name_[% property %]" id="property_name_[% property %]" value="[% property %]" size="20" readonly>
+			&nbsp;&nbsp;
+			<input type="text" class="stdedit" name="property_value_[% property %]" id="property_value_[% property %]" value="[% prefs.properties.$property %]" size="50">
+			<br>
+		[% END %]
+		<input type="text" class="stdedit" name="property_name_new" id="property_name_new" value="" size="20">
+		&nbsp;&nbsp;
+		<input type="text" class="stdedit" name="property_value_new" id="property_value_new" value="" size="50">
+		[% END %]
+
+[% PROCESS settings/footer.html %]

@@ -1,0 +1,14 @@
+<br>
+[% WRAPPER settingGroup title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_GROUP" desc="" %]
+	<div class="prefDesc">[% "SETUP_PLUGIN_CUSTOMBROWSEMENUS_GROUP_DESC" | string %]</div>
+[% END %]
+[% IF subpages.size>1 %]
+[% WRAPPER settingGroup title="SETUP_PLUGIN_CUSTOMBROWSEMENUS_SECTION" desc="SETUP_PLUGIN_CUSTOMBROWSEMENUS_SECTION_DESC" %]
+	<select class="stdedit" name="subpage" id="subpage" onchange="location.href=options[selectedIndex].value">
+		[% FOREACH option = subpages.keys.sort %]
+			<option [% IF subpage == option %]selected[% END %] value="[% subpages.$option %]">[% option | getstring %]</option>
+		[%- END -%]
+	</select>
+[% END %]
+<br>
+[% END %]

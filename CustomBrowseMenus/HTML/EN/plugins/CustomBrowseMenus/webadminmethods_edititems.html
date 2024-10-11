@@ -1,0 +1,60 @@
+<style>.col1{display:inline-block;padding-left:10px;min-width:220px;max-width:220px}.col2{display:inline-block;padding-left:10px;min-width:60px;cursor:default;}.col3{display:inline-block;padding-left:10px;}.thcolpad{padding-left:12px;padding-bottom:10px;}.emphbold{font-weight:600;}.padleft{padding-left:20px;}.cbmbtn{padding:2px;}</style>
+[%- pagetitle = 'PLUGIN_CUSTOMBROWSEMENUS' | string; pageicon = 'PLUGIN_CUSTOMBROWSEMENUS' -%]
+
+[%- pwd_list = BLOCK -%]/[%- PROCESS plugins/CustomBrowseMenus/galleryselect.html -%]
+	<a href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_list.html?player=[% player | uri %]">
+		[% "PLUGIN_CUSTOMBROWSEMENUS" | string %]
+	</a>
+[% END -%]
+[%- pageHeaderInfo = BLOCK %]
+&nbsp;
+[% END -%]
+[% PROCESS pageheader.html %]
+[% PROCESS plugins/CustomBrowseMenus/settings/subpage_chooser.html %]
+
+	<tr valign="top"><td></td><td colspan="4">
+		<span class="padleft"><input type="button" class="cbmbtn" value="[% "PLUGIN_CUSTOMBROWSEMENUS_NEW_ITEM" | string %]" onclick="location.href='[% webroot %]plugins/CustomBrowseMenus/webadminmethods_newitemtypes.html?player=[% player | uri %][% IF pluginWebAdminMethodsRedirect %]&redirect=[% pluginWebAdminMethodsRedirect %][% END %][% IF pluginWebAdminMethodsHandler %]&webadminmethodshandler=[% pluginWebAdminMethodsHandler %][% END %]';"></span>
+		<br><br><br>
+		<tr valign="top"><td></td><td colspan="4">
+		<div class="menucontainer thcolpad">
+			<span class="col1 emphbold">[% "PLUGIN_CUSTOMBROWSEMENUS_ITEM_NAME" | string %]</span>
+			<span class="col2">&nbsp;</span>
+			<span class="col3 emphbold">[% "PLUGIN_CUSTOMBROWSEMENUS_ITEM_ID" | string %]</span>
+		</div>
+		[% IF pluginWebAdminMethodsError %]
+			<strong>[% pluginWebAdminMethodsError %]</strong><br>
+		[% END %]
+		[% IF pluginWebAdminMethodsMessage %]
+			[% pluginWebAdminMethodsMessage %]<br>
+		[% END %]
+		[% odd = 1 %]
+		[% WRAPPER contentcontainer %]
+			[%- FOREACH item IN pluginWebAdminMethodsItems %]
+				[% BLOCK controls %]
+					[% IF !item.defaultitem %]
+						[% WRAPPER removelink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/webadminmethods_removeitem.html?player=[% player | uri %]&item=[% item.id %][% IF pluginWebAdminMethodsRedirect %]&redirect=[% pluginWebAdminMethodsRedirect %][% END %][% IF pluginWebAdminMethodsHandler %]&webadminmethodshandler=[% pluginWebAdminMethodsHandler %][% END %]" onClick="return confirm('[% "PLUGIN_CUSTOMBROWSEMENUS_REMOVE_ITEM_QUESTION" | string %]');" title="[% item.menuname %]"[% END %]
+					[% ELSIF item.enabled %]
+						[% link='cmdlink' cmdimage='cbm_btn_hide.gif' cmdtitle='PLUGIN_CUSTOMBROWSEMENUS_HIDE_ITEM' %]
+						[% WRAPPER $link noTarget=1 %]
+							href="[% webroot %]plugins/CustomBrowseMenus/webadminmethods_hideitem.html?player=[% player | uri %]&item=[% item.id %][% IF pluginWebAdminMethodsRedirect %]&redirect=[% pluginWebAdminMethodsRedirect %][% END %][% IF pluginWebAdminMethodsHandler %]&webadminmethodshandler=[% pluginWebAdminMethodsHandler %][% END %]" title="[% item.menuname %]"
+						[% END %]
+					[% ELSE %]
+						[% link='cmdlink' cmdimage='cbm_btn_show.gif' cmdtitle='PLUGIN_CUSTOMBROWSEMENUS_SHOW_ITEM' %]
+						[% WRAPPER $link noTarget=1 %]
+							href="[% webroot %]plugins/CustomBrowseMenus/webadminmethods_showitem.html?player=[% player | uri %]&item=[% item.id %][% IF pluginWebAdminMethodsRedirect %]&redirect=[% pluginWebAdminMethodsRedirect %][% END %][% IF pluginWebAdminMethodsHandler %]&webadminmethodshandler=[% pluginWebAdminMethodsHandler %][% END %]" title="[% item.menuname %]"
+						[% END %]
+					[% END %]
+				[% END %]
+				[%- WRAPPER contentitem controls='controls' %]
+					<div class="menucontainer">
+						<span class="col1"><a href="[% webroot %]plugins/CustomBrowseMenus/webadminmethods_edititem.html?player=[% player | uri %]&item=[% item.id %][% IF pluginWebAdminMethodsRedirect %]&redirect=[% pluginWebAdminMethodsRedirect %][% END %][% IF pluginWebAdminMethodsHandler %]&webadminmethodshandler=[% pluginWebAdminMethodsHandler %][% END %]">
+						[% item.menuname %]</a></span>
+						<span class="col2">[% IF item.defaultitem %][% "PLUGIN_CUSTOMBROWSEMENUS_BUILTIN_ITEM" | string %][% END %]</span>
+						<span class="col3"><a href="[% webroot %]plugins/CustomBrowseMenus/webadminmethods_edititem.html?player=[% player | uri %]&item=[% item.id %][% IF pluginWebAdminMethodsRedirect %]&redirect=[% pluginWebAdminMethodsRedirect %][% END %][% IF pluginWebAdminMethodsHandler %]&webadminmethodshandler=[% pluginWebAdminMethodsHandler %][% END %]">[% item.id %]</a>[% IF item.defaultitem && !item.enabled %] [% "PLUGIN_CUSTOMBROWSEMENUS_HIDDEN_ITEM" | string %][% END %]</span>
+					</div>
+					[% END %]
+				[% odd = (not odd) %]
+				[% END %]
+		</td></tr>
+		[% END %]
+[% PROCESS pagefooter.html %]

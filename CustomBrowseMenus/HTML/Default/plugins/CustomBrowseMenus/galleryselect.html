@@ -1,0 +1,31 @@
+[%- extJsScripts = BLOCK -%]
+	[% IF pluginCustomBrowseMenusArtworkSupported || pluginCustomBrowseMenusOptions %]
+		<script type="text/javascript" src="[% webroot %]plugins/CustomBrowseMenus/html/custombrowsemenus_browse.js?r=[% revision %]"></script>
+		<script type="text/javascript">
+			[% PROCESS jsString id='SWITCH_TO_LIST' jsId='switch_to_list' %]
+			[% PROCESS jsString id='SWITCH_TO_EXTENDED_LIST' jsId='switch_to_extended_list' %]
+			[% PROCESS jsString id='SWITCH_TO_GALLERY' jsId='switch_to_gallery' %]
+			[% PROCESS jsString id='SORT_BY' jsId='sort_by' %]
+			[% PROCESS jsString id='ALBUM_DISPLAY_OPTIONS' jsId='display_options' %]
+
+			var artworkList;
+			[% IF pluginCustomBrowseMenusArtworkSupported %]
+				artworkList = 1;
+			[% END %]
+			var orderByList;
+			[% IF pluginCustomBrowseMenusOptions %]
+				orderByList = {
+					[% first = 1 %]
+					[% FOREACH option IN pluginCustomBrowseMenusOptions %]
+					[% IF !first %],[% END %]
+					[% first = 0 %]
+						'[% option.name %]' : '[% option.id %]'
+					[% END %]
+				};
+			[% END %]
+			Ext.onReady(function(){
+				CBMBrowse.init();
+			});
+		</script>
+	[% END %]
+[%- END -%]

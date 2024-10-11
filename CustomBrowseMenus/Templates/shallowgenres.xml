@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<template>
+		<name>Genre Albums</name>
+		<description>Genres menu that works the same way as the standard LMS albums menu but is a bit more shallow by moving directly from genres to albums instead of requesting the user to select artists before albums</description>
+		<parameter type="text" id="menuname" name="Menu name" value="Genre Albums"/>
+		<parameter type="text" id="menugroup" name="Menu group" value=""/>
+		<parameter type="text" id="menuorder" name="Menu sort order (1-100)" value="50"/>
+		<parameter type="checkboxes" id="roles" name="Roles to include" value="0" data="1=Artist,2=Composer,3=Conductor,4=Band,5=Album artist,6=Track artist"/>
+		<parameter type="singlelist" id="defaultalbumsort" name="Default album sorting" value="byyear" data="bytitle=By title,byyear=By year"/>
+		<parameter type="checkbox" id="playalltracks" name="Play all songs in selected album" value="1"/>
+		<parameter type="virtuallibrariessinglelist" id="library" name="Limit to this virtual library" value=""/>
+		<parameter type="checkbox" id="activelibrary" name="Limit to active library&lt;br&gt;(will ony show results&lt;br&gt;if a client library view is enabled)" value=""/>
+		<parameter type="text" id="includedclients" name="Only include on these players (empty = all)" value=""/>
+		<parameter type="text" id="excludedclients" name="Exclude from these players" value=""/>
+		<parameter type="virtuallibrariesmultiplelist" id="includedlibraries" name="Only display for these library views" value=""/>
+		<parameter type="virtuallibrariesmultiplelist" id="excludedlibraries" name="Never display for these library views" value=""/>
+	</template>
+</custombrowsemenus>
+

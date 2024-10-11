@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<extension>
+	<id>afc3e610-1390-6f97-60bc-f05a49af8025</id>
+	<name>PLUGIN_CUSTOMBROWSEMENUS</name>
+	<module>Plugins::CustomBrowseMenus::Plugin</module>
+	<version>0.1.1</version>
+	<description>SETUP_PLUGIN_CUSTOMBROWSEMENUS_DESC</description>
+	<creator>AF</creator>
+	<optionsURL>plugins/CustomBrowseMenus/settings/basic.html</optionsURL>
+	<homepageURL>https://github.com/AF-1/lms-custombrowsemenus</homepageURL>
+	<icon>plugins/CustomBrowseMenus/html/images/custombrowsemenus.png</icon>
+	<defaultState>enabled</defaultState>
+	<targetApplication>
+		<id>Logitech Media Server</id>
+		<minVersion>7.9</minVersion>
+		<maxVersion>*</maxVersion>
+	</targetApplication>
+</extension>

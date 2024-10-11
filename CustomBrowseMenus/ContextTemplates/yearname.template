@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		<menugroup>[% objecttype %][% IF menugroup %]/[% menugroup %][% END %]</menugroup>
+		<menuname>[% menuname %]</menuname>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<keyword name="yearid" value="{context.itemid}"/>
+		[% IF menuprefix %]
+		<menuprefix>[% menuprefix %]: </menuprefix>
+		<itemseparator>: </itemseparator>
+		[% END %]
+		<menuheader>{context.itemname} {count}</menuheader>
+		<itemtype>year</itemtype>
+		<contextid>year</contextid>
+		<menutype>sql</menutype>
+		<menudata>
+			select years.id,case when ifnull(years.id,0)=0 then 'Unknown' else years.id end from years[% IF library or activelibrary %],tracks,library_track[% END %]
+			where
+				[%- IF library or activelibrary %]
+				years.id=tracks.year and
+				tracks.id=library_track.track and
+				library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+				[%- END %]
+				years.id={yearid}
+			order by years.id desc
+		</menudata>
+		<menu></menu>
+	</menu>
+</custombrowsemenus>

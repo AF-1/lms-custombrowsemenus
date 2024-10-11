@@ -1,0 +1,198 @@
+PLUGIN_CUSTOMBROWSEMENUS
+	EN	Custom Browse Menus
+
+PLUGIN_CUSTOMBROWSEMENUS_CONTEXTMENU
+	EN	Context Menus
+
+PLUGIN_CUSTOMBROWSEMENUS_SETTINGS
+	EN	Settings
+
+PLUGIN_CUSTOMBROWSEMENUS_SETTINGS_ENABLEDMENUS
+	EN	Enabled menus
+
+PLUGIN_CUSTOMBROWSEMENUS_SETTINGS_ENABLEDCONTEXTMENUS
+	EN	Enabled header/footer items
+
+PLUGIN_CUSTOMBROWSEMENUS_SETTINGS_MANAGEMENUS
+	EN	Manage menus
+
+PLUGIN_CUSTOMBROWSEMENUS_SETTINGS_MANAGECONTEXTMENUS
+	EN	Manage header/footer items
+
+PLUGIN_CUSTOMBROWSEMENUS_WEB_CONTEXTNAME
+	EN	Object
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_GROUP
+	EN	Custom Browse Menus
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_SECTION
+	EN	Settings Section
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_SECTION_DESC
+	EN	Select a settings section
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_GROUP_DESC
+	EN	Custom Browse Menus lets you create your own browse menus.
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_HEADER_VALUE_SEPARATOR
+	EN	Default separator characters for header
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_HEADER_VALUE_SEPARATOR_DESC
+	EN	Default separator characters for multiple items in header
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_OVERRIDE_TRACKINFO
+	EN	Override standard track details
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_OVERRIDE_TRACKINFO_DESC
+	EN	Override standard track details. May require LMS restart.
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOPLEVELMENUINEXTRAS
+	EN	Move CBM menu to <i>Extras</i> menu
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOPLEVELMENUINEXTRAS_DESC
+	EN	By default, the <i>Custom Browse Menus</i> top level menu is part of the <b>My Music</b> menu. This setting allows you to move it to the <b>Extras</b> menu.<br><b>Requires LMS restart.</b>
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_PROPERTIES
+	EN	Properties to use in queries and menus
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_PROPERTIES_DESC
+	EN	Properties to use in queries and menus
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_CBMPARENTFOLDER
+	EN	<u>Parent</u> folder of the<br><i>CustomBrowseMenus</i> folder
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_CBMPARENTFOLDER_DESC
+	EN	Set the <u><b>parent</b></u> folder of the <i>CustomBrowseMenus</i> folder where your custom menu definition files, custom templates, custom icons and cached images are stored in separate, automatically created subfolders
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_MENUNAME
+	EN	CBM top level menu name
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_MENUNAME_DESC
+	EN	Set the <b>name</b> of the <b>top level CBM menu</b> in the <i>MyMusic</i> or <i>Extras</i> menu.<br><b>Requires LMS restart.</b>
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_ENABLED_CONTEXT_MENUS
+	EN	Select enabled header/footer items
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_ENABLED_CONTEXT_MENUS_DESC
+	EN	Select the header/footer or context menu items you want to enable.
+
+PLUGIN_CUSTOMBROWSEMENUS_SELECT_CONTEXT_MENUS_TITLE
+	EN	Enabled
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_ENABLED_MENUS
+	EN	Select enabled menus
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_ENABLED_MENUS_DESC
+	EN	Select the menus you want to <b>enable</b> and whether you also want them to be displayed in the LMS <b>Home</b> menu.
+
+PLUGIN_CUSTOMBROWSEMENUS_SELECT_MENUS_TITLE
+	EN	Enabled menus
+
+PLUGIN_CUSTOMBROWSEMENUS_SELECT_MENUS_BROWSE_TITLE
+	EN	Display in<br>LMS <b>home</b> menu
+
+PLUGIN_CUSTOMBROWSEMENUS_SELECT_MENUS_NONE
+	EN	No Menus
+
+PLUGIN_CUSTOMBROWSEMENUS_SELECT_MENUS_ALL
+	EN	All Menus
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_REPLACE_WEB_MENUS
+	EN	Replace in web interface
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_REPLACE_WEB_MENUS_DESC
+	EN	Replace selected menus in web interface
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_REPLACE_PLAYER_MENUS
+	EN	Replace in player interface
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_REPLACE_PLAYER_MENUS_DESC
+	EN	Replace selected menus in player interface
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_REPLACE_CONTROLLER_MENUS
+	EN	Replace in Controller interface
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_REPLACE_CONTROLLER_MENUS_DESC
+	EN	Replace selected menus in Controller interface
+
+PLUGIN_CUSTOMBROWSEMENUS_NO_ITEMS_FOUND
+	EN	No matching songs, albums or artists were found
+
+PLUGIN_CUSTOMBROWSEMENUS_EDIT_MENUS
+	EN	Edit menus
+
+PLUGIN_CUSTOMBROWSEMENUS_EDIT_CONTEXTMENUS
+	EN	Edit context menus/headers/footers
+
+PLUGIN_CUSTOMBROWSEMENUS_EDIT_ITEM_FILENAME
+	EN	Filename
+
+PLUGIN_CUSTOMBROWSEMENUS_EDIT_ITEM_DATA
+	EN	Menu configuration
+
+PLUGIN_CUSTOMBROWSEMENUS_NEW_ITEM_TYPES_TITLE
+	EN	Select type of menu to create
+
+PLUGIN_CUSTOMBROWSEMENUS_NEW_ITEM
+	EN	Create new menu
+
+PLUGIN_CUSTOMBROWSEMENUS_NEW_ITEM_PARAMETERS_TITLE
+	EN	Please enter menu parameters
+
+PLUGIN_CUSTOMBROWSEMENUS_EDIT_ITEM_PARAMETERS_TITLE
+	EN	Please enter menu parameters
+
+PLUGIN_CUSTOMBROWSEMENUS_REMOVE_ITEM_QUESTION
+	EN	Are you sure you want to delete this menu ?
+
+PLUGIN_CUSTOMBROWSEMENUS_REMOVE_ITEM_TYPE_QUESTION
+	EN	Removing a menu type might cause problems later if it is used in existing menus, are you really sure you want to delete this menu type ?
+
+PLUGIN_CUSTOMBROWSEMENUS_REMOVE_ITEM
+	EN	Delete
+
+PLUGIN_CUSTOMBROWSEMENUS_ITEM_NAME
+	EN	Name
+
+PLUGIN_CUSTOMBROWSEMENUS_ITEM_ID
+	EN	ID
+
+PLUGIN_CUSTOMBROWSEMENUS_BUILTIN_ITEM
+	EN	(built-in)
+
+PLUGIN_CUSTOMBROWSEMENUS_HIDDEN_ITEM
+	EN	(HIDDEN)
+
+PLUGIN_CUSTOMBROWSEMENUS_HIDE_ITEM
+	EN	Hide
+
+PLUGIN_CUSTOMBROWSEMENUS_SHOW_ITEM
+	EN	Show
+
+PLUGIN_CUSTOMBROWSEMENUS_MIX_NOTRACKS
+	EN	Unable to create mix
+
+PLUGIN_CUSTOMBROWSEMENUS_REFRESH
+	EN	Refresh
+
+PLUGIN_CUSTOMBROWSEMENUS_ITEMTYPE
+	EN	Customize configuration
+
+PLUGIN_CUSTOMBROWSEMENUS_ITEMTYPE_SIMPLE
+	EN	Use predefined
+
+PLUGIN_CUSTOMBROWSEMENUS_ITEMTYPE_ADVANCED
+	EN	Customize
+
+PLUGIN_CUSTOMBROWSEMENUS_EDIT_ITEM_OVERWRITE
+	EN	Overwrite existing
+
+PLUGIN_CUSTOMBROWSEMENUS_MORE_INFO
+	EN	More information
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOUCH_TO_PLAY
+	EN	Play when selecting a song
+
+SETUP_PLUGIN_CUSTOMBROWSEMENUS_TOUCH_TO_PLAY_DESC
+	EN	Play when selecting a song on Touch/Radio/Controller/iOS/Android. If set to <b>No</b>, track details will be displayed instead.
+

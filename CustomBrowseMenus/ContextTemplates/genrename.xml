@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<template>
+		<name>Genre name</name>
+		<description>Name of selected genre</description>
+		<parameter type="text" id="menuname" name="Menu name" value="Name"/>
+		<parameter type="text" id="menugroup" name="Menu group" value=""/>
+		<parameter type="text" id="menuorder" name="Menu sort order (1-100)" value="50"/>
+		<parameter type="text" id="menuprefix" name="Menu prefix" value="Name"/>
+		<parameter type="text" id="includedclients" name="Only include on these players (empty = all)" value=""/>
+		<parameter type="text" id="excludedclients" name="Exclude from these players" value=""/>
+		<parameter type="virtuallibrariesmultiplelist" id="includedlibraries" name="Only display for these library views" value=""/>
+		<parameter type="virtuallibrariesmultiplelist" id="excludedlibraries" name="Never display for these library views" value=""/>
+		<parameter type="text" id="objecttype" name="Object type" value="genre"/>
+	</template>
+</custombrowsemenus>
+

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		[% IF menugroup %]<menugroup>[% menugroup %]</menugroup>[% END %]
+		<menuname>[% menuname %]</menuname>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<menu>
+			<id>artist</id>
+			<menuname>Albums</menuname>
+			<itemtype>artist</itemtype>
+			<itemformat>artist</itemformat>
+			<menutype>sql</menutype>
+			<menulinks>alpha</menulinks>
+			<menudata>
+				select contributors.id,contributors.name,substr(contributors.namesort,1,1) from tracks,contributors,albums[% IF includedgenres %],genre_track,genres[% END %][% IF includedcomment %],comments[% END %][% IF library or activelibrary %],library_track[% END %][% IF neverplayed %],tracks_persistent[% END %]
+				where
+					[%- IF library or activelibrary %]
+					tracks.id=library_track.track and
+					library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+					[%- END %]
+					[%- IF neverplayed %]
+					tracks.urlmd5=tracks_persistent.urlmd5 and
+					ifnull(tracks_persistent.playcount,0)=0 and
+					[%- END %]
+					[%- IF lossless %]
+					tracks.lossless=1 and
+					[%- END %]
+					tracks.album=albums.id and
+					albums.contributor=contributors.id
+					[%- IF includedgenres %]
+					and tracks.id=genre_track.track and
+					genre_track.genre=genres.id and
+					genres.name in ([% includedgenres %])
+					[%- END %]
+					[%- IF includedcomment %]
+					and tracks.id=comments.track and
+					[%- IF containsincludedcomment %]
+					comments.value like '%[% includedcomment %]%'
+					[% ELSE %]
+					comments.value='[% includedcomment %]'
+					[%- END %]
+					[%- END %]
+					[%- IF excludedgenres %]
+					and not exists(select * from genre_track,genres
+						where
+							genre_track.track=tracks.id and
+							genre_track.genre=genres.id and
+							genres.name in ([% excludedgenres %]))
+					[%- END %]
+					[%- IF excludedcomment %]
+					and not exists(select * from comments
+						where
+							comments.track=tracks.id and
+							[%- IF containsexcludedcomment %]
+							comments.value like '%[% excludedcomment %]%'
+							[% ELSE %]
+							comments.value='[% excludedcomment %]'
+							[%- END %])
+					[%- END %]
+				group by contributors.id
+				order by contributors.namesort
+			</menudata>
+			<menu>
+				<id>album</id>
+				<menuname>Songs</menuname>
+				<itemtype>album</itemtype>
+				<itemformat>album</itemformat>
+				<menutype>sql</menutype>
+				[%- IF defaultalbumsort %]<defaultoption>[% defaultalbumsort %]</defaultoption>[% END %]
+				<option>
+					<id>byyear</id>
+					<name>Sort by year</name>
+					<itemformat>albumconcat</itemformat>
+					<menulinks>number</menulinks>
+					<menudata>
+						select albums.id,case when ifnull(albums.year,0)=0 then ' ' else '(' || albums.year || ')' end,substr(albums.titlesort,1,1) from tracks,albums[% IF includedgenres %],genre_track,genres[% END %][% IF includedcomment %],comments[% END %][% IF library or activelibrary %],library_track[% END %][% IF neverplayed %],tracks_persistent[% END %]
+						where
+							[%- IF library or activelibrary %]
+							tracks.id=library_track.track and
+							library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+							[%- END %]
+							[%- IF neverplayed %]
+							tracks.urlmd5=tracks_persistent.urlmd5 and
+							ifnull(tracks_persistent.playcount,0)=0 and
+							[%- END %]
+							[%- IF lossless %]
+							tracks.lossless=1 and
+							[%- END %]
+							tracks.id=albums.id and
+							albums.contributor={artist}
+							[%- IF includedgenres %]
+							and tracks.id=genre_track.track and
+							genre_track.genre=genres.id and
+							genres.name in ([% includedgenres %])
+							[%- END %]
+							[%- IF includedcomment %]
+							and tracks.id=comments.track and
+							[%- IF containsincludedcomment %]
+							comments.value like '%[% includedcomment %]%'
+							[% ELSE %]
+							comments.value='[% includedcomment %]'
+							[%- END %]
+							[%- END %]
+							[%- IF excludedgenres %]
+							and not exists(select * from genre_track,genres
+								where
+									genre_track.track=tracks.id and
+									genre_track.genre=genres.id and
+									genres.name in ([% excludedgenres %]))
+							[%- END %]
+							[%- IF excludedcomment %]
+							and not exists(select * from comments
+								where
+									comments.track=tracks.id and
+									[%- IF containsexcludedcomment %]
+									comments.value like '%[% excludedcomment %]%'
+									[% ELSE %]
+									comments.value='[% excludedcomment %]'
+									[%- END %])
+							[%- END %]
+						group by albums.id
+						order by albums.year desc,albums.titlesort asc
+					</menudata>
+				</option>
+				<option>
+					<id>bytitle</id>
+					<name>Sort by title</name>
+					<menulinks>alpha</menulinks>
+					<keyword name="orderby" value="albums.titlesort asc"/>
+				</option>
+				<jivepattern>^(.*)\s\((.*)\)$</jivepattern>
+				<menudata>
+					select albums.id,albums.title,substr(albums.titlesort,1,1) from tracks,albums[% IF includedgenres %],genre_track,genres[% END %][% IF includedcomment %],comments[% END %][% IF library or activelibrary %],library_track[% END %][% IF neverplayed %],tracks_persistent[% END %]
+					where
+						[%- IF library or activelibrary %]
+						tracks.id=library_track.track and
+						library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+						[%- END %]
+						[%- IF neverplayed %]
+						tracks.urlmd5=tracks_persistent.urlmd5 and
+						ifnull(tracks_persistent.playcount,0)=0 and
+						[%- END %]
+						[%- IF lossless %]
+						tracks.lossless=1 and
+						[%- END %]
+						tracks.id=albums.id and
+						albums.contributor={artist}
+						[%- IF includedgenres %]
+						and tracks.id=genre_track.track and
+						genre_track.genre=genres.id and
+						genres.name in ([% includedgenres %])
+						[%- END %]
+						[%- IF includedcomment %]
+						and tracks.id=comments.track and
+						[%- IF containsincludedcomment %]
+						comments.value like '%[% includedcomment %]%'
+						[% ELSE %]
+						comments.value='[% includedcomment %]'
+						[%- END %]
+						[%- END %]
+						[%- IF excludedgenres %]
+						and not exists(select * from genre_track,genres
+							where
+								genre_track.track=tracks.id and
+								genre_track.genre=genres.id and
+								genres.name in ([% excludedgenres %]))
+						[%- END %]
+						[%- IF excludedcomment %]
+						and not exists(select * from comments
+							where
+								comments.track=tracks.id and
+								[%- IF containsexcludedcomment %]
+								comments.value like '%[% excludedcomment %]%'
+								[% ELSE %]
+								comments.value='[% excludedcomment %]'
+								[%- END %])
+						[%- END %]
+					group by albums.id
+					order by {orderby}
+				</menudata>
+				<menu>
+					<id>track</id>
+					<itemtype>track</itemtype>
+					<itemformat>track</itemformat>
+					[%- IF playalltracks %]
+					<playtype>all</playtype>
+					[%- END %]
+					<menutype>sql</menutype>
+					<menudata>
+						select tracks.id,tracks.title from tracks,albums[% IF includedgenres %],genre_track,genres[% END %][% IF includedcomment %],comments[% END %][% IF library or activelibrary %],library_track[% END %][% IF neverplayed %],tracks_persistent[% END %]
+						where
+							[%- IF library or activelibrary %]
+							tracks.id=library_track.track and
+							library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+							[%- END %]
+							[%- IF neverplayed %]
+							tracks.urlmd5=tracks_persistent.urlmd5 and
+							ifnull(tracks_persistent.playcount,0)=0 and
+							[%- END %]
+							[%- IF lossless %]
+							tracks.lossless=1 and
+							[%- END %]
+							tracks.album=albums.id and
+							albums.contributor={artist}
+							[%- IF includedgenres %]
+							and tracks.id=genre_track.track and
+							genre_track.genre=genres.id and
+							genres.name in ([% includedgenres %])
+							[%- END %]
+							[%- IF includedcomment %]
+							and tracks.id=comments.track and
+							[%- IF containsincludedcomment %]
+							comments.value like '%[% includedcomment %]%'
+							[% ELSE %]
+							comments.value='[% includedcomment %]'
+							[%- END %]
+							[%- END %]
+							and tracks.album={album}
+							[%- IF excludedgenres %]
+							and not exists(select * from genre_track,genres
+								where
+									genre_track.track=tracks.id and
+									genre_track.genre=genres.id and
+									genres.name in ([% excludedgenres %]))
+							[%- END %]
+							[%- IF excludedcomment %]
+							and not exists(select * from comments
+								where
+									comments.track=tracks.id and
+									[%- IF containsexcludedcomment %]
+									comments.value like '%[% excludedcomment %]%'
+									[% ELSE %]
+									comments.value='[% excludedcomment %]'
+									[%- END %])
+							[%- END %]
+						group by tracks.id
+						order by tracks.disc,tracks.tracknum asc, tracks.titlesort asc
+					</menudata>
+					<menu>
+						<id>trackdetails</id>
+						<menutype>trackdetails</menutype>
+						<menudata>track|0[% IF activelibrary %]|library={activeclientvirtuallibrary}[% ELSIF library %]|library={selectedvirtuallibrary:[% library %]}[% END %]</menudata>
+					</menu>
+				</menu>
+			</menu>
+		</menu>
+	</menu>
+</custombrowsemenus>

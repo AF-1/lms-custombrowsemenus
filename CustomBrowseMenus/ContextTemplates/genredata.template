@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		<menugroup>[% objecttype %][% IF menugroup %]/[% menugroup %][% END %]</menugroup>
+		<menuname>[% menuname %]</menuname>
+		<menuheader>{context.itemname} {count}</menuheader>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<itemseparator>: </itemseparator>
+		<menutype>sql</menutype>
+		<menudata>
+			[% IF includetitle %]
+			select 1,'Name: ' || genres.name from genres
+			where
+				genres.name is not null and
+				genres.id={context.itemid}
+			[% END %]
+			[% IF includeduration %]
+			[% IF includetitle %]union[% END %]
+			select 2,'Duration: ' || case when (sum(genretracks.secs)/3600) > 1 then cast(sum(genretracks.secs)/3600 as int) || ':' else '' end || cast(strftime('%M', sum(genretracks.secs)/86400) as int) || ':' || strftime('%S', sum(genretracks.secs)/86400) from
+				(select tracks.id,tracks.secs from tracks,genre_track
+				where
+					tracks.secs is not null and
+					tracks.id=genre_track.track and
+					genre_track.genre={context.itemid}
+				group by tracks.id
+				) as genretracks
+			[% END %]
+			[% IF includefilesize %]
+			[% IF includetitle or includeduration %]union[% END %]
+			select 3,'File Size: ' || round(sum(genretracks.filesize)/1024/1024,1) || ' MB' from
+				(select tracks.id,tracks.filesize from tracks,genre_track
+				where
+					tracks.filesize is not null and
+					tracks.id=genre_track.track and
+					genre_track.genre={context.itemid}
+				group by tracks.id
+				) as genretracks
+			[% END %]
+		</menudata>
+	</menu>
+</custombrowsemenus>

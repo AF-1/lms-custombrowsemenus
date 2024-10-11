@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<menu>
+		[%- IF includedclients %]<includedclients>[% includedclients %]</includedclients>[% END %]
+		[%- IF excludedclients %]<excludedclients>[% excludedclients %]</excludedclients>[% END %]
+		[%- IF includedlibraries %]<includedlibraries>[% includedlibraries %]</includedlibraries>[% END %]
+		[%- IF excludedlibraries %]<excludedlibraries>[% excludedlibraries %]</excludedlibraries>[% END %]
+		[% IF menugroup %]<menugroup>[% menugroup %]</menugroup>[% END %]
+		<menuname>[% menuname %]</menuname>
+		[% IF menuorder %]<menuorder>[% menuorder %]</menuorder>[% END %]
+		<menu>
+			<id>artist</id>
+			<menuname>Albums</menuname>
+			<itemtype>artist</itemtype>
+			<itemformat>artist</itemformat>
+			<menutype>sql</menutype>
+			<menulinks>alpha</menulinks>
+			<menudata>
+				select contributors.id,contributors.name,substr(contributors.namesort,1,1) from contributors,albums[% IF library or activelibrary %],library_contributor[% END %]
+				where
+					[%- IF library or activelibrary %]
+					contributors.id=library_contributor.contributor and
+					library_contributor.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+					[%- END %]
+					albums.contributor=contributors.id
+				group by contributors.id
+				order by contributors.namesort asc
+			</menudata>
+			<menu>
+				<id>album</id>
+				<menuname>Songs</menuname>
+				<itemtype>album</itemtype>
+				<itemformat>album</itemformat>
+				<menutype>sql</menutype>
+				[%- IF defaultalbumsort %]<defaultoption>[% defaultalbumsort %]</defaultoption>[% END %]
+				<option>
+					<id>byyear</id>
+					<name>Sort by year</name>
+					<itemformat>albumconcat</itemformat>
+					<menulinks>number</menulinks>
+					<menudata>
+						select albums.id,case when ifnull(albums.year,0)=0 then ' ' else '(' || albums.year || ')' end,substr(albums.titlesort,1,1) from albums[% IF library or activelibrary %],library_album[% END %]
+						where
+							[%- IF library or activelibrary %]
+							albums.id=library_album.album and
+							library_album.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+							[%- END %]
+							albums.contributor={artist}
+						group by albums.id
+						order by albums.year desc,albums.titlesort asc,albums.disc asc
+					</menudata>
+				</option>
+				<option>
+					<id>bytitle</id>
+					<name>Sort by title</name>
+					<menulinks>alpha</menulinks>
+					<keyword name="orderby" value="albums.titlesort asc,albums.disc asc"/>
+				</option>
+				<jivepattern>^(.*)\s\((.*)\)$</jivepattern>
+				<menudata>
+					select albums.id,albums.title,substr(albums.titlesort,1,1) from albums[% IF library or activelibrary %],library_album[% END %]
+					where
+						[%- IF library or activelibrary %]
+						albums.id=library_album.album and
+						library_album.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+						[%- END %]
+						albums.contributor={artist}
+					group by albums.id
+					order by {orderby}
+				</menudata>
+				<menu>
+					<id>track</id>
+					<itemtype>track</itemtype>
+					<itemformat>track</itemformat>
+					[%- IF playalltracks %]
+					<playtype>all</playtype>
+					[%- END %]
+					<menutype>sql</menutype>
+					<menudata>
+						select tracks.id,tracks.title from tracks,albums[% IF library or activelibrary %],library_track[% END %]
+						where
+							[%- IF library or activelibrary %]
+							tracks.id=library_track.track and
+							library_track.library=[% IF activelibrary %]{activeclientvirtuallibrary}[% ELSE %]{selectedvirtuallibrary:[% library %]}[% END %] and
+							[%- END %]
+							tracks.audio=1 and
+							tracks.album={album} and
+							albums.contributor={artist}
+						group by tracks.id
+						order by tracks.disc,tracks.tracknum asc,tracks.titlesort asc
+					</menudata>
+					<menu>
+						<id>trackdetails</id>
+						<menutype>trackdetails</menutype>
+						<menudata>track|0[% IF activelibrary %]|library={activeclientvirtuallibrary}[% ELSIF library %]|library={selectedvirtuallibrary:[% library %]}[% END %]</menudata>
+					</menu>
+				</menu>
+			</menu>
+		</menu>
+	</menu>
+</custombrowsemenus>

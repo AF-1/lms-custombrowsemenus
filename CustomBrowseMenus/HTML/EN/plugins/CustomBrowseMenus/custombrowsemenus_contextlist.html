@@ -1,0 +1,129 @@
+[%- IF !ajaxUpdate %]
+	[%- pagetitle = 'PLUGIN_CUSTOMBROWSEMENUS' | string; pageicon = 'PLUGIN_CUSTOMBROWSEMENUS' -%]
+	[%- titleRight = BLOCK %]
+	<div id="viewSelect"></div>
+[% END %]
+
+[% IF useAJAX %][% pageHeaderScripts = BLOCK %]
+	<script TYPE="text/javascript">[% PROCESS html/vars.js %]</script>
+	<script type="text/javascript" src="[% webroot %]html/common.js?r=[% revision %]" ></script>
+	<script type="text/javascript" src="[% webroot %]html/prototype.js?r=[% revision %]" ></script>
+	<script type="text/javascript" src="[% webroot %]html/scriptaculous/scriptaculous.js?r=[% revision %]"></script>
+	<script TYPE="text/javascript" src="[% webroot %]html/global.js?r=[% revision %]"></script>
+[% END %][% END %]
+
+[%- pwd_list = BLOCK -%]/[%- PROCESS plugins/CustomBrowseMenus/galleryselect.html -%]
+	[% IF !pluginCustomBrowseMenusMainBrowseMenu %]
+		<a href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_list.html?player=[% player | uri %]">[% "PLUGIN_CUSTOMBROWSEMENUS" | string %]</a>
+	[% ELSE %]
+		[% skipPrefix = 1 %]
+	[% END %]
+
+	[% contextNo = 0 %]
+
+	[% FOREACH group IN pluginCustomBrowseMenusContext %]
+		[% IF group.enabled %]
+			[% IF !skipPrefix %]&nbsp;/&nbsp;[% END %]<a href="[% webroot %][% IF contextNo %]plugins/CustomBrowseMenus/custombrowsemenus_contextlist.html[% ELSE %][% path %][% END %]?[% IF pluginCustomBrowseMenusNoItems %]noitems=1&[% END %]player=[% player | uri %]&[% group.url %][% group.valueUrl %][% IF pluginCustomBrowseMenusMainBrowseMenu %]&mainBrowseMenu=1[% END %]">[% group.name | html %]</a>
+			[% skipPrefix = 0 %]
+			[% pagetitle = group.name %]
+			[% prevHomeString = homeString %]
+			[% prevHomeURI = goHomeURI %]
+			[% homeString = group.name %]
+			[% IF(contextNo);
+				goHomeURI = '"' _ webroot _ 'plugins/CustomBrowseMenus/custombrowsemenus_contextlist.html?';
+			ELSE;
+				goHomeURI = '"' _ webroot _ path _ '?';
+			END %]
+			[% IF (pluginCustomBrowseMenusNoItems);
+				goHomeURI = goHomeURI _ 'noitems=1&';
+			END %]
+			[% goHomeURI = goHomeURI _ 'player=' _ playerURI _ '&' _ group.url _ group.valueUrl %]
+			[% IF (pluginCustomBrowseMenusMainBrowseMenu);
+				goHomeURI = goHomeURI _ '&mainBrowseMenu=1';
+			END %]
+			[% goHomeURI = goHomeURI _ '"' %]
+		[% END %]
+		[% contextNo = contextNo + 1 %]
+		[% END %]
+	[% goHomeURI = prevHomeURI %]
+	[% homeString = prevHomeString %]
+[% END -%]
+
+[% IF pluginCustomBrowseMenusScanWarning %]
+	[%- pageHeaderInfo = BLOCK %]
+	<p>[% PROCESS scanwarning %]
+	[% END -%]
+[% END %]
+
+[% PROCESS pageheader.html dontscroll=1 %]
+[% END %]
+
+[% PROCESS plugins/CustomBrowseMenus/iteminfo.html %]
+
+[%- IF artwork == 1 && (pluginCustomBrowseMenusArtworkSupported);
+	contentwrapper = 'galleryitem';
+	container = 'gallerycontainer';
+ELSE;
+	contentwrapper = 'contentitem';
+	container = 'contentcontainer';
+END %]
+
+[% CustomBrowseMenusUrl = 'plugins/CustomBrowseMenus/custombrowsemenus_contextlist.html'; %]
+[% CustomBrowseMenusItemText = 'CustomBrowseMenusContextItemText' %]
+[% pluginCustomBrowseMenusContextPage = 1 %]
+[% PROCESS plugins/CustomBrowseMenus/cbmcomponents.html %]
+[% PROCESS plugins/CustomBrowseMenus/custombrowsemenus.css %]
+
+<div id="browsedbHeader">
+	[% IF !pluginCustomBrowseMenusNoItems && pluginCustomBrowseMenusPageInfo && pluginCustomBrowseMenusPageInfo.totalpages > 1 %]
+		[% PROCESS cbmitemcount %]
+		[% PROCESS cbmpagebar %]
+	[% END %]
+	[% PROCESS plugins/CustomBrowseMenus/menuheader.html items=pluginCustomBrowseMenusHeaderItems %]
+</div>
+[% WRAPPER cbmcontainer %]
+	[% WRAPPER $container %]
+		[% odd = 1 %]
+		[% PROCESS cbmcontentitemheader %]
+		[% IF pluginCustomBrowseMenusItems and pluginCustomBrowseMenusItems.size>0 %]
+			[% IF pluginCustomBrowseMenusCurrentContext and pluginCustomBrowseMenusPlayAddAll %]
+				[% BLOCK allsongscontrols %]
+					[% WRAPPER playlink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_contextplayall.html?player=[% player | uri %][% pluginCustomBrowseMenusCurrentContext.url %][% pluginCustomBrowseMenusCurrentContext.valueUrl %][% IF start %]&start=[% start %][% END %]"[% END %]
+					[% WRAPPER insertlink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_contextinsertall.html?player=[% player | uri %][% pluginCustomBrowseMenusCurrentContext.url %][% pluginCustomBrowseMenusCurrentContext.valueUrl %][% IF start %]&start=[% start %][% END %]"[% END %]
+					[% WRAPPER addlink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_contextaddall.html?player=[% player | uri %][% pluginCustomBrowseMenusCurrentContext.url %][% pluginCustomBrowseMenusCurrentContext.valueUrl %][% IF start %]&start=[% start %][% END %]"[% END %]
+				[% END %]
+				[% PROCESS cbmcontentitemallsongs %]
+				[% odd = (not odd) %]
+			[% END %]
+			[% count = 0 %]
+		[% ELSIF !pluginCustomBrowseMenusNoItems %]
+			[% "PLUGIN_CUSTOMBROWSEMENUS_NO_ITEMS_FOUND" | string %]<br>
+		[% END %]
+
+		[% FOREACH item = pluginCustomBrowseMenusMenuItems %]
+			[% BLOCK controls %]
+				[% IF item.playtype != 'none' %]
+					[% IF item.attributes %]
+						[% WRAPPER playlink %][% PROCESS cmdHRef cmdType='play' target='status' itemobj=item.itemobj attributes=item.attributes %][% END %]
+						[% WRAPPER insertlink %][% PROCESS cmdHRef cmdType='insert' target='status' itemobj=item.itemobj attributes=item.attributes %][% END %]
+						[% WRAPPER addlink %][% PROCESS cmdHRef cmdType='add' target='status' itemobj=item.itemobj attributes=item.attributes %][% END %]
+					[% ELSIF item.url %]
+						[% WRAPPER playlink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_contextplay.html?player=[% player | uri %]&[% item.url %][% IF start %]&start=[% start %][% END %]"[% END %]
+						[% WRAPPER insertlink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_contextinsert.html?player=[% player | uri %]&[% item.url %][% IF start %]&start=[% start %][% END %]"[% END %]
+						[% WRAPPER addlink noTarget=1 %]href="[% webroot %]plugins/CustomBrowseMenus/custombrowsemenus_contextadd.html?player=[% player | uri %]&[% item.url %][% IF start %]&start=[% start %][% END %]"[% END %]
+					[% END %]
+				[% END %]
+			[% END %]
+			[% PROCESS cbmcontentitemlist %]
+			[% odd = (not odd) %]
+		[% END %]
+	[% END %]
+[% END %]
+
+<div id="pageFooterInfo">
+	[% PROCESS cbmcontextfooter %]
+</div>
+
+[%- IF !ajaxUpdate %]
+[% PROCESS pagefooter.html %]
+[% END %]

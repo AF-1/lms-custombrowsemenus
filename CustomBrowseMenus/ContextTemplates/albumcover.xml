@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<custombrowsemenus>
+	<template>
+		<name>Album cover</name>
+		<description>Album cover for the selected album</description>
+		<parameter type="text" id="menuname" name="Menu name" value="Album cover"/>
+		<parameter type="text" id="menugroup" name="Menu group" value=""/>
+		<parameter type="text" id="menuorder" name="Menu sort order (1-100)" value="1"/>
+		<parameter type="text" id="imagewidth" name="Image width" value="200"/>
+		<parameter type="text" id="includedclients" name="Only include on these players (empty = all)" value=""/>
+		<parameter type="text" id="excludedclients" name="Exclude from these players" value=""/>
+		<parameter type="virtuallibrariesmultiplelist" id="includedlibraries" name="Only display for these library views" value=""/>
+		<parameter type="virtuallibrariesmultiplelist" id="excludedlibraries" name="Never display for these library views" value=""/>
+		<parameter type="text" id="objecttype" name="Object type" value="album"/>
+	</template>
+</custombrowsemenus>
+
