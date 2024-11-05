@@ -3,13 +3,13 @@
 		<title lang="EN">CustomBrowseMenus GitHub Repo (AF1)</title>
 	</details>
 	<plugins>
-		<plugin name="CustomBrowseMenus" category="tools" version="0.1.1" minTarget="7.9" maxTarget="*">
+		<plugin name="CustomBrowseMenus" category="tools" version="0.1.2" minTarget="7.9" maxTarget="*">
 			<title lang="EN">Custom Browse Menus</title>
 			<desc lang="EN">A modified version of the CustomBrowse plugin.</desc>
-			<url>https://github.com/AF-1/lms-custombrowsemenus/releases/download/0.1.1/lms-custombrowsemenus-0.1.1.zip</url>
+			<url>https://github.com/AF-1/lms-custombrowsemenus/releases/download/0.1.2/lms-custombrowsemenus-0.1.2.zip</url>
 			<creator>AF</creator>
 			<link>https://github.com/AF-1/lms-custombrowsemenus</link>
-			<sha>f0248eb4a62dc14f6c2c53debce996eb767c6e2c</sha>
+			<sha>68c242040367fcdbc04b2445042ad1d894f836ba</sha>
 		</plugin>
 	</plugins>
 </extensions>
