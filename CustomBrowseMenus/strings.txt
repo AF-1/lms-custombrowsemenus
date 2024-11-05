@@ -1,6 +1,9 @@
 PLUGIN_CUSTOMBROWSEMENUS
 	EN	Custom Browse Menus
 
+PLUGIN_CUSTOMBROWSEMENUS_DESC
+	EN	A modified version of the CustomBrowse plugin
+
 PLUGIN_CUSTOMBROWSEMENUS_CONTEXTMENU
 	EN	Context Menus
 
