@@ -804,7 +804,7 @@ sub contextMenuBrowseBy {
 	} elsif ($item && ref($item) eq 'Slim::Schema::Year') {
 		%p = (
 			'itemtype' => 'year',
-			'itemname' => ($item->id?$item->id:$client->string('UNK')),
+			'itemname' => ($item->id?$item->id:string('UNK')),
 			'itemid' => $item->id
 		);
 	}

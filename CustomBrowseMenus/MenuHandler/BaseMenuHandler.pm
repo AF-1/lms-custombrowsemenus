@@ -619,7 +619,7 @@ sub getHeaderText {
 		my $listIndex = $client->modeParam('listIndex');
 		my $listRef = $client->modeParam('listRef');
 		my %standardParameters = (
-			'count' => ' ('.($listIndex+1).' '.$client->string('OF').' '.scalar(@$listRef).')'
+			'count' => ' ('.($listIndex+1).' '.string('OF').' '.scalar(@$listRef).')'
 		);
 		my $keywords = _combineKeywords($item->{'parameters'}, \%standardParameters);
 		$menuTitle = $self->itemParameterHandler->replaceParameters($client, $menuTitle, $keywords, $context);
@@ -2020,7 +2020,7 @@ sub showBrieflyPlayStatus {
 	if ($client->linesPerScreen == 1) {
 		$line2 = $client->doubleString($displayString);
 	} else {
-		$line1 = $client->string($displayString);
+		$line1 = string($displayString);
 		$line2 = $self->getItemText($client, $item, undef, undef);
 	}
 	$client->showBriefly({
