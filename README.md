@@ -14,8 +14,8 @@ I've uploaded it here so that others who want to continue with this plugin don't
 
 ## Changes
 
-- works with the [**Custom Tag Importer**](https://github.com/AF-1/) plugin to use imported custom file tags (replaces the deprecated *CustomScan* plugin)
-- should support **virtual libraries** (the deprecated *MultiLibrary* plugin is no longer supported)
+- use custom file tags imported with the [**Custom Tag Importer**](https://github.com/AF-1/) plugin[^1]
+- should support **virtual libraries**[^2]
 - UI changes
 - ...
 
@@ -29,3 +29,6 @@ I've uploaded it here so that others who want to continue with this plugin don't
 - Install the plugin from the added repository at the bottom of the page.
 
 <br><br><br>
+
+[^1]:[**Custom Tag Importer**](https://github.com/AF-1/) replaces the deprecated *CustomScan* plugin.
+[^2]:Since LMS has supported virtual libraries since version 7.9, the deprecated *MultiLibrary* plugin is no longer supported.
