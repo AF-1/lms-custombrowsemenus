@@ -4,7 +4,7 @@ Custom Browse Menus
 
 A modified version of the CustomBrowse plugin by Erland Isaksson.<br>
 **No guarantees that it will work or continue to do so**.<br>
-I uploaded it so that others who want to continue with this plugin don't have to waste time with the changes I've already made - if they want to keep them.
+I've uploaded it here so that others who want to continue with this plugin don't have to waste time with the changes I've already made - if they want to keep them.
 
 > [!NOTE]
 > ⚠️ **I'm not maintaining this plugin. I don't provide support for it.**<br>
@@ -14,8 +14,8 @@ I uploaded it so that others who want to continue with this plugin don't have to
 
 ## Changes
 
-- works with [**Custom Tag Importer**](https://github.com/AF-1/) plugin (instead of *CustomScan* plugin)
-- should support **virtual libraries** (instead of *MultiLibrary* plugin)
+- works with the [**Custom Tag Importer**](https://github.com/AF-1/) plugin to use imported custom file tags (replaces the deprecated *CustomScan* plugin)
+- should support **virtual libraries** (the deprecated *MultiLibrary* plugin is no longer supported)
 - UI changes
 - ...
 
