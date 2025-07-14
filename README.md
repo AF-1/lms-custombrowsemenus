@@ -30,5 +30,5 @@ I've uploaded it here so that others who want to continue with this plugin don't
 
 <br><br><br>
 
-[^1]:[**Custom Tag Importer**](https://github.com/AF-1/) replaces the deprecated **CustomScan*** plugin.
+[^1]:[**Custom Tag Importer**](https://github.com/AF-1/) replaces the deprecated **CustomScan** plugin.
 [^2]:Since LMS has supported virtual libraries since version 7.9, the deprecated **MultiLibrary** plugin is no longer supported.
