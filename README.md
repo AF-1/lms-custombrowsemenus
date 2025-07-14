@@ -1,15 +1,16 @@
 Custom Browse Menus
 ====
-![Min. LMS Version](https://img.shields.io/badge/Min.-LMS-Version-Required-7.9-darkgreen)<br>
+![Min. LMS Version](https://img.shields.io/badge/Min._LMS_Version_Required-7.9-darkgreen)<br>
 
 A modified version of the CustomBrowse plugin by Erland Isaksson.<br>
 **No guarantees that it will work or continue to do so**.<br>
 I uploaded it so that others who want to continue with this plugin don't have to waste time with the changes I've already made - if they want to keep them.
 
-> > [!NOTE]
+> [!NOTE]
 > ⚠️ **I'm not maintaining this plugin. I don't provide support for it.**<br>
 > If you have any problems, check out the [Lyrion Community Support Forum](https://forums.lyrion.org/).
-<br><br>
+
+<br><br><br>
 
 ## Changes
 
